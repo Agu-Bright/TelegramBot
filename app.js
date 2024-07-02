@@ -70,6 +70,7 @@ bot.onText(/\/setMessage/, (msg) => {
   bot.sendMessage(chatId, "write your message");
 });
 bot.onText(/\/start/, (msg) => {
+  console.log("You said hii");
   const chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
