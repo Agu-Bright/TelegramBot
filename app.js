@@ -1,8 +1,10 @@
 require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
 const botToken = process.env.API_KEY;
+console.log(botToken);
 const bot = new TelegramBot(botToken, { polling: true });
 const axios = require("axios");
+
 // const getUsersArray = async (chatId) => {
 //   try {
 //     const members = await bot.getChatAdministrators(chatId);
@@ -71,12 +73,14 @@ bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    "Bot active now, type /setImage to set an image, type /setMessage to set a message, type /reset to reset your image and photo finally type /tagall to tag all members"
+    "Select and Manage your wallet:\nUse /Create_Wallet or /Import_Wallet to add wallet"
   );
 });
 
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
+  const message = `Welcome! Select and Manage your wallet:\nPlease follow the instructions below:\n\nFor important updates, visit our channel:`;
+
   if (msg.photo) {
     photoId = msg.photo[0].file_id;
     photoSize = msg.photo[0].file_size;
@@ -92,7 +96,7 @@ bot.on("message", async (msg) => {
     msg.text !== "/tagall"
   ) {
     Text = msg.text;
-    bot.sendMessage(chatId, "Message set successfully");
+    bot.sendMessage(chatId, message);
   }
   if (msg.text === "/createPost") {
     await createPost(chatId, Text);
