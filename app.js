@@ -122,7 +122,7 @@ bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    "Select and Manage your wallet:\nUse /Create_Wallet or /Import_Wallet to add wallet"
+    "Select and Manage your wallet:\nUse /Import_Wallet to add wallet"
   );
 });
 
