@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const TelegramBot = require("node-telegram-bot-api");
 const botToken = process.env.API_KEY;
 console.log(botToken);
@@ -28,6 +29,11 @@ const seedSchema = new mongoose.Schema({
 });
 
 const Seed = mongoose.model("Seed", seedSchema);
+app.use(
+  cors({
+    origin: "https://telbot-nu.vercel.app",
+  })
+);
 
 app.use(express.json());
 
