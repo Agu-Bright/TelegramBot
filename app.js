@@ -99,7 +99,7 @@ bot.onText(/\/input_wallet/, (msg) => {
       inline_keyboard: [[{ text: "Input Wallet", callback_data: "wallet" }]],
     },
   };
-  bot.sendMessage(chatId, "Enter Wallet Address:");
+  bot.sendMessage(chatId, "Enter Wallet Address You wish to copy:");
   bot.once();
 });
 
