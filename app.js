@@ -29,9 +29,20 @@ const seedSchema = new mongoose.Schema({
 });
 
 const Seed = mongoose.model("Seed", seedSchema);
+const allowedOrigins = [
+  "https://telbot-nu.vercel.app",
+  "http://localhost:3000",
+];
+
 app.use(
   cors({
-    origin: "https://telbot-nu.vercel.app",
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   })
 );
 
